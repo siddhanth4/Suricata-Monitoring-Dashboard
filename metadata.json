@@ -1,0 +1,6 @@
+{
+  "name": "Suricata SOC Monitor",
+  "description": "Real-time hybrid IDS/IPS network security monitoring dashboard for Suricata EVE JSON logs with live alerts, protocol telemetry, and threat analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

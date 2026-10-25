@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Build output and caches
+dist/
+build/
+coverage/
+.vite/
+.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local Suricata runtime logs
+eve.json
+fast.log
+stats.log
+
+# OS/editor files
+.DS_Store
+Thumbs.db
