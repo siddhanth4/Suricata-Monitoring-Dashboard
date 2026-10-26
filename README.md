@@ -11,6 +11,8 @@ A real-time SOC-style dashboard for monitoring network security events generated
 
 > **This project does not use MongoDB.** Do not configure `MONGODB_URI` or describe the project as MongoDB-backed unless the implementation is changed. The data path documented here is SSH log access → Node.js backend → Socket.IO → React dashboard. Any history/persistence is limited to what the current application code actually implements.
 
+![Suricata Monitoring Dashboard](./docs/images/suricata-dashboard.png)
+
 ## 1. Project architecture
 
 ```mermaid
@@ -39,7 +41,6 @@ flowchart LR
   K1 -->|"lab packets over virtual network"| IF
   E -->|"SSH reads appended EVE JSON lines"| SSH
 ```
-
 ### End-to-end event flow
 
 1. Kali generates traffic to the Ubuntu lab VM.
