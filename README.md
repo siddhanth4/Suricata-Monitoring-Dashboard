@@ -332,10 +332,10 @@ ssh -i "$env:USERPROFILE\.ssh\suricata_dashboard" YOUR_UBUNTU_USERNAME@192.168.1
 
 - [System Architecture](https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/architecture.md)
 - [Ubuntu VM Setup Guide](https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/ubuntu-setup.md)
+- [IDS/IPS Rules & Testing Guide](docs/ids-ips-rules-testing.md)
 - [REST API & Socket.IO Reference](https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/api-reference.md)
 - [Troubleshooting Guide](https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/troubleshooting.md)
 - [Security Considerations](https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/security.md)
-- [IDS/IPS Rules & Testing Guide](docs/ids-ips-rules-testing.md)
 
 ## 11. Scope and safety
 
