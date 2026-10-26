@@ -181,99 +181,100 @@ export const SettingsPage: React.FC = () => {
         </div>
       </div>     
 
-      {/* 2. Ubuntu Virtual Machine Setup Guide */}
+            {/* 2. Project Documentation */}
       <div className="p-5 bg-gradient-to-br from-[#202020] via-[#101010] to-[#030303] border border-[#303030] rounded-lg space-y-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
         <div className="flex items-center gap-2 pb-3 border-b border-[#1E293B]">
-          <Terminal className="w-4 h-4 text-amber-400" />
-          <h2 className="text-sm font-semibold text-slate-100">Ubuntu Virtual Machine Suricata Setup Guide</h2>
+          <Terminal className="w-4 h-4 text-indigo-400" />
+          <h2 className="text-sm font-semibold text-slate-100">
+            Project Documentation
+          </h2>
         </div>
 
         <p className="text-xs text-slate-300 leading-relaxed">
-          Follow these steps on your Ubuntu VM hosting Suricata. Never run Node.js as root solely to read Suricata logs.
+          Explore the project documentation on GitHub for the architecture,
+          Ubuntu setup, IDS/IPS rule testing, API reference, troubleshooting,
+          and security guidelines.
         </p>
 
-        <div className="space-y-4 text-xs font-mono">
-          {/* Step 1 */}
-          <div className="p-3 bg-gradient-to-br from-[#151515] via-[#0B0B0B] to-[#030303] border border-[#303030] rounded-md space-y-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-            <div className="flex items-center justify-between text-slate-400 font-sans font-semibold">
-              <span>1. Install Suricata & Community Emerging Threats (ET) Rules</span>
-              <button
-                onClick={() =>
-                  copyToClipboard(
-                    'sudo apt update && sudo apt install -y suricata jq\nsudo suricata-update',
-                    'step1'
-                  )
-                }
-                className="text-slate-400 hover:text-white"
-              >
-                {copiedId === 'step1' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-            <pre className="text-indigo-300">
-              sudo apt update && sudo apt install -y suricata jq{'\n'}
-              sudo suricata-update
-            </pre>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {[
+            {
+              title: 'README.md',
+              description: 'Project overview, features, architecture, and setup',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/README.md',
+              icon: Shield,
+            },
+            {
+              title: 'Architecture Guide',
+              description: 'System architecture, data flow, and IDS/IPS modes',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/architecture.md',
+              icon: Server,
+            },
+            {
+              title: 'Ubuntu Setup Guide',
+              description: 'Suricata installation, SSH setup, and log integration',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/ubuntu-setup.md',
+              icon: Terminal,
+            },
+            {
+              title: 'IDS/IPS Rules & Testing',
+              description: 'Existing detection rules and lab testing procedures',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/ids-ips-rules-testing.md',
+              icon: Shield,
+            },
+            {
+              title: 'API Reference',
+              description: 'API endpoints and integration details',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/api-reference.md',
+              icon: SettingsIcon,
+            },
+            {
+              title: 'Troubleshooting Guide',
+              description: 'Common issues, diagnostics, and possible fixes',
+              url: 'https://github.com/siddhanth4/Suricata-Monitoring-Dashboard/blob/main/docs/troubleshooting.md',
+              icon: AlertTriangle,
+            },
+          ].map((doc) => {
+            const Icon = doc.icon;
 
-          {/* Step 2 */}
-          <div className="p-3 bg-gradient-to-br from-[#151515] via-[#0B0B0B] to-[#030303] border border-[#303030] rounded-md space-y-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-            <div className="flex items-center justify-between text-slate-400 font-sans font-semibold">
-              <span>2. Identify Real Network Interface (Do NOT assume eth0)</span>
-              <button
-                onClick={() => copyToClipboard('ip -brief address show\n# or: ip link show', 'step2')}
-                className="text-slate-400 hover:text-white"
+            return (
+              <a
+                key={doc.title}
+                href={doc.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-3 p-4 bg-gradient-to-br from-[#151515] via-[#0B0B0B] to-[#030303] border border-[#303030] rounded-md hover:border-indigo-500/60 hover:bg-[#111827] transition-colors"
               >
-                {copiedId === 'step2' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-            <pre className="text-indigo-300">
-              ip -brief address show{'\n'}
-              # Note interface name (e.g. ens33, enp0s3, or eth0)
-            </pre>
-          </div>
+                <Icon className="w-4 h-4 mt-0.5 text-indigo-400 shrink-0" />
 
-          {/* Step 3 */}
-          <div className="p-3 bg-gradient-to-br from-[#151515] via-[#0B0B0B] to-[#030303] border border-[#303030] rounded-md space-y-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-            <div className="flex items-center justify-between text-slate-400 font-sans font-semibold">
-              <span>3. Configure Safe Non-Root Permissions for eve.json</span>
-              <button
-                onClick={() =>
-                  copyToClipboard(
-                    '# Create suricata group access for current node user\nsudo chmod 755 /var/log/suricata\nsudo chmod 644 /var/log/suricata/eve.json 2>/dev/null || true',
-                    'step3'
-                  )
-                }
-                className="text-slate-400 hover:text-white"
-              >
-                {copiedId === 'step3' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-            <pre className="text-indigo-300">
-              sudo chmod 755 /var/log/suricata{'\n'}
-              sudo chmod 644 /var/log/suricata/eve.json
-            </pre>
-          </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-xs font-semibold text-slate-100 group-hover:text-indigo-300 transition-colors">
+                    {doc.title}
+                  </h3>
 
-          {/* Step 4 */}
-          <div className="p-3 bg-gradient-to-br from-[#151515] via-[#0B0B0B] to-[#030303] border border-[#303030] rounded-md space-y-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.025)]">
-            <div className="flex items-center justify-between text-slate-400 font-sans font-semibold">
-              <span>4. Launch Suricata Engine in IDS Sniffer Mode</span>
-              <button
-                onClick={() =>
-                  copyToClipboard(
-                    'sudo suricata -c /etc/suricata/suricata.yaml -i <YOUR_INTERFACE> -D',
-                    'step4'
-                  )
-                }
-                className="text-slate-400 hover:text-white"
-              >
-                {copiedId === 'step4' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-            <pre className="text-indigo-300">
-              sudo suricata -c /etc/suricata/suricata.yaml -i ens33 -D
-            </pre>
-          </div>
+                  <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                    {doc.description}
+                  </p>
+
+                  <span className="inline-block text-[10px] text-indigo-400 mt-2">
+                    Open on GitHub ↗
+                  </span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        <div className="pt-3 border-t border-[#1E293B]">
+          <a
+            href="https://github.com/siddhanth4/Suricata-Monitoring-Dashboard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+          >
+            <Shield className="w-4 h-4" />
+            View Complete GitHub Repository ↗
+          </a>
         </div>
       </div>
 
